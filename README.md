@@ -1,4 +1,4 @@
-# discord_bot_for_blog
+# discord_bot
 
 ## Environment Setup
 
