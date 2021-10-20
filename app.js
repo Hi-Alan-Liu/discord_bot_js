@@ -69,7 +69,7 @@ class Music {
           return;
       }
 
-      // 處理字串，將 !!play 字串拿掉，只留下 YouTube 網址
+      // 處理字串，將 ${prefix}play 字串拿掉，只留下 YouTube 網址
       const musicURL = msg.content.replace(`${prefix}play`, '').trim();
 
       try {
@@ -256,7 +256,21 @@ client.on('message', async (msg) => {
   if (content === `${prefix}dice`) {
     var dice = Math.floor(Math.random() * 6) + 1;
     msg.reply(`擲出了 ${dice} 點` );
-    console.log(`擲出了 ${dice} 點`);
+  }
+
+  if (content === `${prefix}help`) {
+    const embed = new Discord.MessageEmbed()
+    .setColor(0x3498DB)
+    .setAuthor(`${client.user.username} 使用說明書`, `https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}.png`)
+    .setTitle("這是一個 Alan 自製的 Discord Bot")
+    .setDescription("可使用的指令如下")
+    .setThumbnail(`https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}.png`)
+    .addFields(
+      { name: "放音樂", value: `${prefix}join 進入頻道 \n ${prefix}play yt音樂播放 \n ${prefix}resume 音樂繼續 \n ${prefix}pause 音樂暫停 \n ${prefix}skip 跳下一首 \n ${prefix}queue 音樂清單 \n ${prefix}leave 離開頻道`, inline: true },
+      { name: "搖骰子", value: `${prefix}dice 擲骰`, inline: true }
+    )
+
+    msg.channel.send(embed);
   }
 });
 
